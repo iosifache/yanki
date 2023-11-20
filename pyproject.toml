@@ -1,0 +1,188 @@
+[tool.poetry]
+name = "yanki"
+version = "0.1.0"
+description = "YAML to Anki deck convertor"
+keywords = [
+    "anki",
+    "knowledge-base",
+]
+authors = ["George-Andrei Iosif (@iosifache)"]
+license = "MIT"
+repository = "https://github.com/iosifache/yanki"
+homepage = "https://github.com/iosifache/yanki"
+readme = "README.pypi.md"
+classifiers = [
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+]
+include = [
+    "LICENSE",
+]
+packages = [{include = "yanki"}]
+
+[tool.poetry.urls]
+"Changelog" = ""
+"Issue Tracker" = "https://github.com/iosifache/yanki/issues"
+"LinkedIn" = ""
+"Twitter" = ""
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.scripts]
+yanki = "yanki.main:main"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+mypy = "^1.0.0"
+ruff = "^0.0.246"
+coverage = {extras = ["toml"], version = "^7.1.0"}
+poethepoet = "^0.18.1"
+pytest = "^7.2.1"
+
+[tool.black]
+line-length = 79
+preview = true
+include = '\.pyi?$'
+extend-exclude = """
+(
+    ^/.venv/*
+    ^/dist/*
+)
+"""
+
+[tool.ruff]
+src = ["yanki", "tests"]
+select=[
+    # Pyflakes
+    "F",
+    # pycodestyle
+    "E",
+    "W",
+    # mccabe
+    "C90",
+    # isort
+    "I",
+    # pep8-naming
+    "N",
+    # pydocstyle
+    "D",
+    # pyupgrade
+    "UP",
+    # flake8-2020
+    "YTT",
+    # flake8-annotations
+    "ANN",
+    # flake8-bandit
+    "S",
+    # flake8-blind-except
+    "BLE",
+    # flake8-boolean-trap
+    "FBT",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-commas
+    "COM",
+    # flake8-comprehensions
+    "C4",
+    # flake8-datetimez
+    "DTZ",
+    # flake8-debugger
+    "T10",
+    # flake8-django
+    "DJ",
+    # flake8-errmsg
+    "EM",
+    # flake8-executable
+    "EXE",
+    # flake8-implicit-str-concat
+    "ISC",
+    # flake8-import-conventions
+    "ICN",
+    # flake8-logging-format
+    "G",
+    # flake8-no-pep420
+    "INP",
+    # flake8-pie
+    "PIE",
+    # flake8-print
+    "T20",
+    # flake8-pyi
+    "PYI",
+    # flake8-pytest-style
+    "PT",
+    # flake8-quotes
+    "Q",
+    # flake8-return
+    "RET",
+    # flake8-simplify
+    "SIM",
+    # flake8-tidy-imports
+    "TID",
+    # flake8-type-checking
+    "TCH",
+    # flake8-unused-arguments
+    "ARG",
+    # flake8-use-pathlib
+    "PTH",
+    # eradicate
+    "ERA",
+    # pandas-vet
+    "PD",
+    # pygrep-hooks
+    "PGH",
+    # Pylint
+    "PL",
+    # tryceratops
+    "TRY",
+    # flake8-raise
+    "RSE",
+    # flake8-self
+    "SLF",
+    # Ruff-specific rules
+    "RUF",
+]
+line-length = 79
+
+[tool.ruff.isort]
+known-first-party= ["yanki"]
+known-local-folder = ["yanki"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+files = [
+  "yanki",
+  "scripts",
+  "tests"
+]
+show_error_codes = true
+namespace_packages = true
+explicit_package_bases = true
+ignore_missing_imports = true
+
+[tool.coverage.run]
+omit = [
+    "tests/*"
+]
+
+[tool.poe.tasks]
+
+    [tool.poe.tasks.test]
+    help = "Run all unit tests."
+    cmd  = "coverage run -m pytest -vv tests/"
+
+    [tool.poe.tasks.coverage]
+    help = "Report the coverage"
+    cmd = "coverage report -m"
+
+    [tool.poe.tasks.covtest]
+    help = "Run the unit tests and report the coverage."
+    sequence = ["test", "coverage"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
