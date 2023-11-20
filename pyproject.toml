@@ -6,7 +6,7 @@ keywords = [
     "anki",
     "knowledge-base",
 ]
-authors = ["George-Andrei Iosif (@iosifache)"]
+authors = ["George-Andrei Iosif <hi@iosifache.me>"]
 license = "MIT"
 repository = "https://github.com/iosifache/yanki"
 homepage = "https://github.com/iosifache/yanki"
@@ -28,6 +28,8 @@ packages = [{include = "yanki"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pyyaml = "^6.0.1"
+genanki = "^0.13.1"
 
 [tool.poetry.scripts]
 yanki = "yanki.main:main"
@@ -145,6 +147,7 @@ select=[
     "RUF",
 ]
 line-length = 79
+target-version = "py311"
 
 [tool.ruff.isort]
 known-first-party= ["yanki"]
