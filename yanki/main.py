@@ -1,4 +1,4 @@
-"""Dummy source file."""
+"""Converts a YAML into Anki decks."""
 
 import os
 import random
@@ -14,10 +14,10 @@ import yaml
 class Entry:
     name: str
     language: str
-    entry_type: typing.Optional[str]
+    entry_type: str | None
     meaning: str
 
-    def get_parent_deck(self) -> str:
+    def get_parent_deck(self: "Entry") -> str:
         return self.entry_type if self.entry_type else self.language
 
 
