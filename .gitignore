@@ -8,3 +8,7 @@
 **/__pycache__
 /.mypy_cache
 /.coverage
+
+# Data
+data/*
+!data/decks/,gitkeep

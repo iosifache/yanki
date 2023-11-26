@@ -30,6 +30,7 @@ packages = [{include = "yanki"}]
 python = "^3.11"
 pyyaml = "^6.0.1"
 genanki = "^0.13.1"
+types-pyyaml = "^6.0.12.12"
 
 [tool.poetry.scripts]
 yanki = "yanki.main:main"
@@ -145,6 +146,11 @@ select=[
     "SLF",
     # Ruff-specific rules
     "RUF",
+]
+ignore = [
+    "D101",
+    "D103",
+    "UP006"
 ]
 line-length = 79
 target-version = "py311"
